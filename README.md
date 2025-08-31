@@ -7,19 +7,19 @@ A LLM and RAG powered anime recommendation system that suggests anime based on u
 ### Installation
 
 ```bash
-pip install -r requirements.txt
+uv sync
 ```
 
 ### Running the Application
 
 ```bash
-python main.py
+uv run python main.py
 ```
 
 Or run the Flask web app:
 
 ```bash
-python app/app.py
+uv run python app/app.py
 ```
 
 ### Docker
