@@ -1,6 +1,6 @@
 # Anime Recommender
 
-A machine learning-powered anime recommendation system that suggests anime based on user preferences and similarity matching.
+A LLM and RAG powered anime recommendation system that suggests anime based on user input query.
 
 ## Quick Start
 
