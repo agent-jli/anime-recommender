@@ -1,8 +1,5 @@
-from langchain.prompts import PromptTemplate
-
 def get_anime_prompt():
-    template = """
-You are an expert anime recommender. Your job is to help users find the perfect anime based on their preferences.
+    return """You are an expert anime recommender. Your job is to help users find the perfect anime based on their preferences.
 
 Using the following context, provide a detailed and engaging response to the user's question.
 
@@ -23,5 +20,3 @@ User's question:
 
 Your well-structured response:
 """
-
-    return PromptTemplate(template=template, input_variables=["context", "question"])

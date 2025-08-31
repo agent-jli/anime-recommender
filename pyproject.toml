@@ -1,0 +1,37 @@
+[project]
+name = "anime-recommender"
+version = "0.1.0"
+description = "AI-powered anime recommendation system with semantic search"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "chromadb",
+    "streamlit",
+    "pandas",
+    "python-dotenv",
+    "sentence-transformers",
+    "openai>=1.102.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "black",
+    "flake8",
+    "mypy"
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src", "app", "config", "utils", "pipeline"]
+
+[tool.uv]
+dev-dependencies = [
+    "pytest>=7.0.0",
+    "black>=22.0.0", 
+    "flake8>=4.0.0",
+    "mypy>=0.910"
+]

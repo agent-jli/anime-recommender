@@ -1,4 +1,244 @@
-venv/
-logs/
+# =============================================================================
+# PYTHON & VIRTUAL ENVIRONMENTS
+# =============================================================================
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
 ANIME_RECOMMENDER.egg-info/
+
+# PyInstaller - usually these files are written by a python script from a template
+# before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+.ENV/
+.env/
+pyvenv.cfg
+
+# pipenv
+Pipfile.lock
+
+# Poetry
+poetry.lock
+
+# PDM
+.pdm.toml
+
+# PEP 582
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# =============================================================================
+# ENVIRONMENT & SECRETS
+# =============================================================================
 .env
+.env.local
+.env.development
+.env.test
+.env.production
+.env.staging
+*.key
+*.pem
+secrets.yaml
+config.secret.*
+
+# =============================================================================
+# PROJECT-SPECIFIC
+# =============================================================================
+# Application logs
+logs/
+*.log
+log/
+
+# Vector database (ChromaDB)
+chroma_db/
+*.chroma
+*.db
+*.sqlite
+*.sqlite3
+
+# Data files (uncomment if you don't want to track large datasets)
+# data/*.csv
+# data/*.json
+# data/*.parquet
+# data/*.pkl
+# data/*.pickle
+
+# Model files and checkpoints
+models/
+checkpoints/
+*.pkl
+*.pickle
+*.joblib
+*.model
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# =============================================================================
+# IDE & EDITORS
+# =============================================================================
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# =============================================================================
+# OPERATING SYSTEM
+# =============================================================================
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+
+# =============================================================================
+# PYTHON VERSION MANAGEMENT
+# =============================================================================
+.python-version
+.pyenv
+
+# =============================================================================
+# PACKAGE MANAGERS & DEPENDENCIES
+# =============================================================================
+# uv
+.uv/
+uv.lock
+
+# pip
+pip-log.txt
+pip-delete-this-directory.txt
+
+# =============================================================================
+# TESTING & COVERAGE
+# =============================================================================
+# pytest
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# =============================================================================
+# DOCKER & CONTAINERS
+# =============================================================================
+# Docker
+.dockerignore
+docker-compose.override.yml
+
+# =============================================================================
+# CLOUD & DEPLOYMENT
+# =============================================================================
+# Kubernetes secrets (keep configs but ignore secrets)
+*-secrets.yaml
+k8s-secrets/
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# =============================================================================
+# MISC
+# =============================================================================
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Temporary files
+tmp/
+temp/
+.tmp/
+
+# Archives
+*.zip
+*.tar.gz
+*.tar.bz2
+*.rar
+
+# Large files that shouldn't be in git
+*.dump

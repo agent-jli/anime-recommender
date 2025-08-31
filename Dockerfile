@@ -1,5 +1,5 @@
 ## Parent image
-FROM python:3.10-slim
+FROM python:3.12-slim
 
 ## Essential environment variables
 ENV PYTHONDONTWRITEBYTECODE=1 \
@@ -8,17 +8,24 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 ## Work directory inside the docker container
 WORKDIR /app
 
-## Installing system dependancies
+## Installing system dependancies and uv
 RUN apt-get update && apt-get install -y \
     build-essential \
     curl \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && pip install uv
 
-## Copying ur all contents from local to app
+## Copy dependency files first for better layer caching
+COPY pyproject.toml uv.lock ./
+
+## Install dependencies using uv (much faster than pip)
+RUN uv sync --frozen
+
+## Copy the rest of the application
 COPY . .
 
-## Run setup.py
-RUN pip install --no-cache-dir -e .
+## Install the package in development mode
+RUN uv pip install -e .
 
 # Used PORTS
 EXPOSE 8501

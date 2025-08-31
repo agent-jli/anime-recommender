@@ -2,7 +2,7 @@ import streamlit as st
 from pipeline.pipeline import AnimeRecommendationPipeline
 from dotenv import load_dotenv
 
-st.set_page_config(page_title="Anime Recommnder",layout="wide")
+st.set_page_config(page_title="Anime Recommender",layout="wide")
 
 load_dotenv()
 
@@ -14,7 +14,7 @@ pipeline = init_pipeline()
 
 st.title("Anime Recommender System")
 
-query = st.text_input("Enter your anime prefernces eg. : light hearted anime with school settings")
+query = st.text_input("Enter your anime preferences eg. : light hearted anime with school settings")
 if query:
     with st.spinner("Fetching recommendations for you....."):
         response = pipeline.recommend(query)

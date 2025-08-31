@@ -1,9 +1,6 @@
-langchain
-langchain-community
-langchain_groq
+openai
 chromadb
 streamlit
 pandas
 python-dotenv
 sentence-transformers
-langchain_huggingface

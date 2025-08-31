@@ -1,39 +1,92 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: llmops-app
-  labels:
-    app: llmops
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: llmops
-  template:
-    metadata:
-      labels:
-        app: llmops
-    spec:
-      containers:
-      - name: llmops-container
-        image: llmops-app:latest  # Use local image
-        imagePullPolicy: IfNotPresent
+# =============================================================================
+# KUBERNETES DEPLOYMENT CONFIGURATION
+# =============================================================================
+# 🚀 DEPLOYMENT: This manages your application containers (pods)
+# Think of it as the "recipe" that tells Kubernetes:
+# - What image to run
+# - How many copies to create
+# - How to update them
+# - What to do if they crash
+
+apiVersion: apps/v1          # Which Kubernetes API version to use for Deployments
+kind: Deployment             # The type of resource we're creating
+metadata:                    # Information ABOUT this deployment
+  name: llmops-app          # Name of this deployment (must be unique in namespace)
+  labels:                   # Tags to organize and find this deployment
+    app: llmops            # Label that groups related resources together
+
+spec:                       # The DESIRED STATE - what we want Kubernetes to maintain
+  replicas: 1              # How many identical copies (pods) to run
+                           # 👉 Tip: Increase this for high availability (e.g., replicas: 3)
+  
+  selector:                # How this deployment finds its pods
+    matchLabels:           # Must match the pod template labels below
+      app: llmops         # 🔗 This links the deployment to pods with label "app: llmops"
+  
+  template:               # Template for creating new pods (like a cookie cutter)
+    metadata:            # Information about each pod that gets created
+      labels:           # Labels applied to each pod
+        app: llmops    # 🔗 This MUST match the selector above
+    
+    spec:               # What goes INSIDE each pod
+      containers:       # List of containers in this pod (usually just 1)
+      - name: llmops-container        # Container name (for logs/debugging)
+        image: llmops-app:latest     # 🐳 Docker image to run
+        imagePullPolicy: IfNotPresent # Don't pull if image exists locally
+                                     # 📝 Alternatives: Always, Never
         ports:
-          - containerPort: 8501
+          - containerPort: 8501      # Port your app listens on INSIDE the container
+                                    # 📝 This is typically your Streamlit port (8501)
+        
+        # 🔐 ENVIRONMENT VARIABLES: Load secrets into container
         envFrom:
           - secretRef:
-              name: llmops-secrets 
+              name: llmops-secrets   # Kubernetes secret containing API keys, etc.
+                                    # 👉 Create with: kubectl create secret generic llmops-secrets --from-env-file=.env
 
----
-apiVersion: v1
-kind: Service
+# =============================================================================
+# KUBERNETES SERVICE CONFIGURATION  
+# =============================================================================
+# 🌐 SERVICE: This provides stable network access to your pods
+# Think of it as the "front door" that:
+# - Gives your app a stable IP address
+# - Load balances traffic between multiple pods
+# - Handles port mapping from outside world to your containers
+
+---                         # YAML separator (allows multiple resources in one file)
+
+apiVersion: v1              # Services use v1 API (older, more stable than apps/v1)
+kind: Service              # The type of resource we're creating
 metadata:
-  name: llmops-service
+  name: llmops-service    # Service name (used for internal DNS: llmops-service.default.svc.cluster.local)
+
 spec:
-  type: LoadBalancer
-  selector:
-    app: llmops
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 8501
+  type: LoadBalancer      # 🌍 How to expose this service to the outside world
+                         # 📝 Alternatives:
+                         #    - ClusterIP: Only accessible within cluster
+                         #    - NodePort: Accessible on each node's IP
+                         #    - LoadBalancer: Gets external IP (needs cloud provider)
+  
+  selector:              # Which pods should receive traffic from this service
+    app: llmops         # 🔗 Must match the labels in your deployment template above
+                        # This is how the service "finds" your pods
+  
+  ports:                # Port mapping configuration
+    - protocol: TCP     # Network protocol (TCP is most common)
+      port: 80         # 🌐 External port (what clients connect to)
+      targetPort: 8501  # 🎯 Internal port (where your container is listening)
+                        # Traffic flow: Client:80 → LoadBalancer:80 → Pod:8501
+
+# =============================================================================
+# 🔍 QUICK REFERENCE
+# =============================================================================
+# To deploy:     kubectl apply -f llmops-k8s.yaml
+# To check pods: kubectl get pods -l app=llmops
+# To check svc:  kubectl get services llmops-service
+# To get logs:   kubectl logs -l app=llmops
+# To scale:      kubectl scale deployment llmops-app --replicas=3
+# To delete:     kubectl delete -f llmops-k8s.yaml
+#
+# 📝 Connection Flow:
+# Internet → LoadBalancer (port 80) → Service → Pod (port 8501) → Your App
+# =============================================================================

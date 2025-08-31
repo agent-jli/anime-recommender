@@ -6,7 +6,7 @@
 - **Create a Dockerfile**  
   Write a `Dockerfile` in the root of your project to containerize the app.
 
-- **Create Kubernetes Deployemtn file**  
+- **Create Kubernetes Deployment file**  
   Make a file named 'llmops-k8s.yaml' 
 
 - **Create a VM Instance on Google Cloud**
@@ -163,7 +163,7 @@ kubectl apply -f llmops-k8s.yaml
 
 kubectl get pods
 
-### U will see pods runiing
+### You will see pods running
 
 
 # Do minikube tunnel on one terminal
@@ -183,13 +183,13 @@ kubectl port-forward svc/llmops-service 8501:80 --address 0.0.0.0
 ### 6. GRAFANA CLOUD MONITORING
 
 ```bash
-## Open another VM terminal for Grfana cloud
+## Open another VM terminal for Grafana cloud
 
 kubectl create ns monitoring
 
 kubectl get ns
 
-## Make account on Grfaana cloud
+## Make account on Grafana cloud
 
 ### Install HELM - Search on Google
 -- Copy commands from script section..
