@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
     && pip install uv
 
 ## Copy dependency files first for better layer caching
-COPY pyproject.toml uv.lock ./
+COPY pyproject.toml uv.lock README.md ./
 
 ## Install dependencies using uv (much faster than pip)
 RUN uv sync --frozen
